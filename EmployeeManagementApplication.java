@@ -460,14 +460,12 @@ public class EmployeeManagementApplication extends Application {
 
         Label nameLabel = new Label("Name:");
         TextField nameField = new TextField();
-        Label departmentLabel = new Label("Department ID is added automatically");
 
         Button submitButton = new Button("Submit");
         Button backButton = new Button("Back");
 
         grid.add(nameLabel, 0, 0);
         grid.add(nameField, 1, 0);
-        grid.add(departmentLabel, 0, 1);
         grid.add(submitButton, 1, 4);
         grid.add(backButton, 1, 5);
 
