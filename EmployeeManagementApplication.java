@@ -81,6 +81,8 @@ public class EmployeeManagementApplication extends Application {
         grid.add(passwordField, 1, 1);
         grid.add(loginButton, 1, 2);
 
+        loginButton.setDefaultButton(true);
+
         loginButton.setOnAction(event -> {
             taskThreadPool.submit(() -> {
                 String username = usernameField.getText();
@@ -439,8 +441,7 @@ public class EmployeeManagementApplication extends Application {
             }
 
             try {
-                DatabaseConnection.insertEmployee(connection, name, departmentId, salary, email);
-                showAlert("Success", "Employee added successfully!");
+                DatabaseConnection.insertEmployee(connection, name, departmentId, salary, email, this);
                 navigateBackToDashboard();
             } catch (Exception e) {
                 showAlert("Error", "Failed to add employee: " + e.getMessage());
@@ -478,8 +479,8 @@ public class EmployeeManagementApplication extends Application {
                 throw new IllegalArgumentException("Invalid department name.");
             }
             try {
-                DatabaseConnection.insertDepartment(connection, name);
-                showAlert("Success", "Department added successfully!");
+                DatabaseConnection.insertDepartment(connection, name, this);
+
                 navigateBackToDashboard();
             } catch (Exception e) {
                 showAlert("Error", "Failed to add department: " + e.getMessage());
@@ -1312,7 +1313,7 @@ public class EmployeeManagementApplication extends Application {
         }
     }
 
-    private void showAlert(String title, String message) {
+    public void showAlert(String title, String message) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle(title);
